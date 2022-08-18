@@ -3,7 +3,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: basic-auth
-  namesace: kube-system
+  namespace: kube-system
 spec:
   basicAuth:
     secret: krzwiatrzyk-basic-auth

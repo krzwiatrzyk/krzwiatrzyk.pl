@@ -1,0 +1,18 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: longhorn
+  namespace: longhorn
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: HostRegexp(`longhorn.{suffix:.*}`)
+    kind: Rule
+    middlewares:                    
+    - name: basic-auth             
+      namespace: kube-system  
+    services:   
+    - kind: Service
+      name: longhorn-frontend
+      port: 80

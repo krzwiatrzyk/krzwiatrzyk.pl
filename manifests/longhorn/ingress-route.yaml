@@ -16,3 +16,5 @@ spec:
     - kind: Service
       name: longhorn-frontend
       port: 80
+  tls:
+    secretName: longhorn.krzwiatrzyk.pl

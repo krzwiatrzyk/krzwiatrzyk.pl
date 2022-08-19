@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: default-certificate
   issuerRef: 
-    kind: Issuer
+    kind: ClusterIssuer
     name: letsencrypt-prod
   commonName: "*.krzwiatrzyk.pl"
   dnsNames:

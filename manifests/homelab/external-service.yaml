@@ -1,0 +1,15 @@
+kind: "Service"
+apiVersion: "v1"
+metadata:
+  name: homelab
+  namespace: homelab
+  annotations:
+    traefik.ingress.kubernetes.io/service.serversscheme: https
+spec:
+  ports:
+  - name: "https"
+    protocol: "TCP"
+    port: 443
+    targetPort: 443
+    nodePort: 0
+  selector: {}

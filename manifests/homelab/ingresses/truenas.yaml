@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: truenas
+  namespace: homelab
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    # flame.pawelmalak/type: application
+    # flame.pawelmalak/name: Filebrowser
+    # flame.pawelmalak/url: "https://filebrowser.krzwiatrzyk.pl"
+    # flame.pawelmalak/icon: "https://user-images.githubusercontent.com/39112161/40266023-f9f6884c-5b6d-11e8-8175-0933fb008922.jpg"
+spec:
+  rules:
+  - host: truenas.homelab.krzwiatrzyk.pl
+    http:
+      paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: homelab
+              port:
+                number: 443
+  tls:
+  - secretName: truenas.homelab.krzwiatrzyk.pl
+    hosts:
+    - truenas.homelab.krzwiatrzyk.pl

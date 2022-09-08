@@ -1,0 +1,11 @@
+kind: "Endpoints"
+apiVersion: "v1"
+metadata:
+  name: homelab
+  namespace: homelab
+subsets: 
+- addresses:
+  - ip: "100.78.181.48" 
+  ports:
+  - port: 443 
+    name: "https"

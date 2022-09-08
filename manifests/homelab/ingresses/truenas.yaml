@@ -12,7 +12,7 @@ metadata:
     # flame.pawelmalak/icon: "https://user-images.githubusercontent.com/39112161/40266023-f9f6884c-5b6d-11e8-8175-0933fb008922.jpg"
 spec:
   rules:
-  - host: truenas.homelab.krzwiatrzyk.pl
+  - host: truenas1.homelab.krzwiatrzyk.pl
     http:
       paths:
         - pathType: Prefix

@@ -7,8 +7,7 @@ spec:
   entryPoints:                 
     - dns-udp
   routes:                       
-  - match: HostSNI(`*`)         
-    services:                  
+  - services:                  
     - name: homelab-dns         
       port: 53               
 

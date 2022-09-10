@@ -1,7 +1,7 @@
 kind: "Endpoints"
 apiVersion: "v1"
 metadata:
-  name: homelab
+  name: homelab-dns
   namespace: homelab
 subsets: 
 - addresses:

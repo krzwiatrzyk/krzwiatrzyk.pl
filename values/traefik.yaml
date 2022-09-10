@@ -1,4 +1,6 @@
 ports:
+  web:
+    redirectTo: websecure
   websecure:
     tls:
       enabled: true
@@ -8,15 +10,16 @@ ports:
     exposedPort: 5432
     protocol: TCP
   dns-udp:
-    port: 53
+    port: 8053
     expose: true
     exposedPort: 53
     protocol: UDP
   dns-tcp:
-    port: 53
+    port: 8053
     expose: true
     exposedPort: 53
     protocol: TCP
+
 providers:
   kubernetesIngress:
     publishedService:

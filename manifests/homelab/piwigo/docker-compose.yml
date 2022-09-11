@@ -8,10 +8,11 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: piwigodb
-      MYSQL_USER: piwigo_user
-      MYSQL_PASSWORD: piwigo_pass
-      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+
 
   piwigo:
     image: linuxserver/piwigo:12.3.0

@@ -5,7 +5,7 @@ metadata:
   namespace: homelab
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     traefik.ingress.kubernetes.io/router.middlewares: kube-system-basic-auth@kubernetescrd
     # flame.pawelmalak/type: application
     # flame.pawelmalak/name: Filebrowser

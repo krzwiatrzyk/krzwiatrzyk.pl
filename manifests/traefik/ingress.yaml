@@ -1,49 +1,49 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: traefik
-  namespace: traefik
-spec:
-  entryPoints:
-    - websecure
-  routes:
-  - match: Host(`traefik.krzwiatrzyk.pl`)
-    kind: Rule
-    middlewares:                    
-    - name: basic-auth             
-      namespace: kube-system  
-    services:   
-    - kind: TraefikService
-      name: api@internal
-  tls:
-    secretName: traefik.krzwiatrzyk.pl
-
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
 # metadata:
 #   name: traefik
 #   namespace: traefik
-#   annotations:
-#     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-#     cert-manager.io/cluster-issuer: letsencrypt-staging
-#     traefik.ingress.kubernetes.io/router.middlewares: basic-auth@kubernetescrd
-#     # flame.pawelmalak/type: application
-#     # flame.pawelmalak/name: Filebrowser
-#     # flame.pawelmalak/url: "https://filebrowser.krzwiatrzyk.pl"
-#     # flame.pawelmalak/icon: "https://user-images.githubusercontent.com/39112161/40266023-f9f6884c-5b6d-11e8-8175-0933fb008922.jpg"
 # spec:
-#   rules:
-#   - host: traefik.krzwiatrzyk.pl
-#     http:
-#       paths:
-#         - pathType: Prefix
-#           path: "/"
-#           backend:
-#             service:
-#               name: traefik
-#               port:
-#                 number: 9000
+#   entryPoints:
+#     - websecure
+#   routes:
+#   - match: Host(`traefik.krzwiatrzyk.pl`)
+#     kind: Rule
+#     middlewares:                    
+#     - name: basic-auth             
+#       namespace: kube-system  
+#     services:   
+#     - kind: TraefikService
+#       name: api@internal
 #   tls:
-#   - secretName: traefik.krzwiatrzyk.pl
-#     hosts:
-#     - traefik.krzwiatrzyk.pl
+#     secretName: traefik.krzwiatrzyk.pl
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traefik
+  namespace: traefik
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.middlewares: basic-auth@kubernetescrd
+    # flame.pawelmalak/type: application
+    # flame.pawelmalak/name: Filebrowser
+    # flame.pawelmalak/url: "https://filebrowser.krzwiatrzyk.pl"
+    # flame.pawelmalak/icon: "https://user-images.githubusercontent.com/39112161/40266023-f9f6884c-5b6d-11e8-8175-0933fb008922.jpg"
+spec:
+  rules:
+  - host: traefik.krzwiatrzyk.pl
+    http:
+      paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: traefik
+              port:
+                number: 9000
+  tls:
+  - secretName: traefik.krzwiatrzyk.pl
+    hosts:
+    - traefik.krzwiatrzyk.pl

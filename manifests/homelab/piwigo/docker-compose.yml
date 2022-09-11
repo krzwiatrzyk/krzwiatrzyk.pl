@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:latest
+    restart: always
+    privileged: true
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: piwigodb
+      MYSQL_USER: piwigo_user
+      MYSQL_PASSWORD: piwigo_pass
+      MYSQL_ROOT_PASSWORD: toor
+
+  piwigo:
+    image: linuxserver/piwigo:12.3.0
+    restart: always
+    privileged: true
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=America/Chicago
+    ports:
+      - "12800:80"
+    links:
+      - db
+    depends_on:
+      - db
+    volumes:
+      - /mnt/Data/Piwigo/config:/config
+      - /mnt/Data/Piwigo/:/gallery
+
+volumes:
+  db_data:

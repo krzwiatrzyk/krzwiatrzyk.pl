@@ -7,12 +7,12 @@ services:
       restart: always
       # depends_on:
       #     - ytdl-mongo-db
-      volumes:
-          - appdata:/app/appdata
-          - audio:/app/audio
-          - video:/app/video
-          - subscriptions:/app/subscriptions
-          - users:/app/users
+    #   volumes:
+    #       - appdata:/app/appdata
+    #       - audio:/app/audio
+    #       - video:/app/video
+    #       - subscriptions:/app/subscriptions
+    #       - users:/app/users
       ports:
           - "9998:17442"
       image: tzahi12345/youtubedl-material:latest

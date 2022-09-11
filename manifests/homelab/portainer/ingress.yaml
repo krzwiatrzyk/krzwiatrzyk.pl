@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: portainer
+  namespace: homelab
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.middlewares: kube-system-basic-auth@kubernetescrd
+    # flame.pawelmalak/type: application
+    # flame.pawelmalak/name: Filebrowser
+    # flame.pawelmalak/url: "https://filebrowser.krzwiatrzyk.pl"
+    # flame.pawelmalak/icon: "https://user-images.githubusercontent.com/39112161/40266023-f9f6884c-5b6d-11e8-8175-0933fb008922.jpg"
+spec:
+  rules:
+  - host: portainer.homelab.krzwiatrzyk.pl
+    http:
+      paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: homelab
+              port:
+                number: 443
+  tls:
+  - secretName: portainer.homelab.krzwiatrzyk.pl
+    hosts:
+    - portainer.homelab.krzwiatrzyk.pl

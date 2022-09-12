@@ -12,7 +12,7 @@ services:
           - /mnt/Data/Nextcloud/Data/__groupfolders/1/Audio:/app/audio
           - /mnt/Data/Nextcloud/Data/__groupfolders/1/Video:/app/video
           - subscriptions:/app/subscriptions
-          - users:/app/users
+          - /mnt/Data/Nextcloud/Data/__groupfolders/1:/app/users
       ports:
           - "9998:17442"
       image: tzahi12345/youtubedl-material:latest
@@ -28,4 +28,3 @@ services:
 volumes:
   appdata:
   subscriptions:
-  users:

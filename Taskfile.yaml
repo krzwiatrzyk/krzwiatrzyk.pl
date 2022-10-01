@@ -1,0 +1,17 @@
+version: 3
+
+tasks:
+  kubeseal:install:
+    cmds:
+    - arkade get kubeseal
+    status:
+    - command -v kubeseal
+
+  kubeseal:encrypt:
+    deps:
+    - kubeseal:install
+    cmds:
+    - >
+      kubeseal --controller-name sealed-secrets --controller-namespace sealed-secrets 
+      --secret-file {{ .CLI_ARGS }}
+      --sealed-secret-file {{ .CLI_ARGS }}

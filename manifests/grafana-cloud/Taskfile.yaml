@@ -5,20 +5,20 @@ tasks:
   - sops -d manifests/grafana-cloud-agent-configmap.yaml | kubectl apply -f - -n grafana-cloud
   - sops -d manifests/grafana-cloud-agent-logs-configmap.yaml | kubectl apply -f - -n grafana-cloud
 
-  grafana-cloud:install:agent:statefulset:
+  agent:metrics:
     env:
       MANIFEST_URL: https://raw.githubusercontent.com/grafana/agent/v0.24.0/production/kubernetes/agent-bare.yaml
       NAMESPACE: grafana-cloud
     cmds:
-    - /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/grafana/agent/v0.24.0/production/kubernetes/install-bare.sh)" | kubectl apply -f -
+    - /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/grafana/agent/v0.24.0/production/kubernetes/install-bare.sh)" > grafana-cloud-metrics.yaml
 
 
-  grafana-cloud:install:agent:daemonset:
+  agent:logs:
     env:
       MANIFEST_URL: https://raw.githubusercontent.com/grafana/agent/v0.24.0/production/kubernetes/agent-loki.yaml
       NAMESPACE: grafana-cloud
     cmds:
-    - /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/grafana/agent/v0.24.0/production/kubernetes/install-bare.sh)" | kubectl apply -f -
+    - /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/grafana/agent/v0.24.0/production/kubernetes/install-bare.sh)" > grafana-cloud-logs.yaml
  
 
   grafana-cloud:install:kube-state-metrics:

@@ -36,13 +36,13 @@ spec:
               flame.pawelmalak/icon: "https://ghost.org/images/logos/ghost-logo-orb.png"
             enabled: true
             hosts:
-            - host: new.krzwiatrzyk.pl
+            - host: krzwiatrzyk.pl
               paths:
               - path: /
             tls:
-            - secretName: new.krzwiatrzyk.pl
+            - secretName: krzwiatrzyk.pl
               hosts:
-              - new.krzwiatrzyk.pl
+              - krzwiatrzyk.pl
 
         persistence:
           content:

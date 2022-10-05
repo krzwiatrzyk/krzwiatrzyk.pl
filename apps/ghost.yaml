@@ -1,0 +1,66 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ghost
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/foreground
+spec:
+  project: default
+  source:
+    repoURL: https://k8s-at-home.com/charts/
+    targetRevision: '2.1.x'
+    chart: ghost
+    helm:
+      values: |
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 192Mi
+        image:
+          tag: 5-alpine
+        env:
+          url: "https://krzwiatrzyk.pl"
+          database__client: sqlite3
+          database__connection__filename: "/var/lib/ghost/content/data/ghost.db"
+        ingress:
+          main:
+            annotations:
+              cert-manager.io/cluster-issuer: letsencrypt-prod
+              flame.pawelmalak/type: application
+              flame.pawelmalak/name: Ghost
+              flame.pawelmalak/url: "https://krzwiatrzyk.pl"
+              flame.pawelmalak/icon: "https://ghost.org/images/logos/ghost-logo-orb.png"
+            enabled: true
+            hosts:
+            - host: new.krzwiatrzyk.pl
+              paths:
+              - path: /
+            tls:
+            - secretName: new.krzwiatrzyk.pl
+              hosts:
+              - new.krzwiatrzyk.pl
+
+        persistence:
+          content:
+            enabled: true
+            storageClass: "longhorn"
+            size: 5Gi
+            accessMode: "ReadWriteOnce"
+
+            # -- Set to true to retain the PVC upon `helm uninstall`
+            retain: true
+
+  destination:
+    name: krzwiatrzyk
+    namespace: ghost-new
+
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    syncOptions: 
+    - CreateNamespace=true
